@@ -1,25 +1,43 @@
 <md-dialog aria-label="List dialog">
-  <md-dialog-content>
-    <h2 class="md-title">
-      Set a description for the new thing
-    </h2>
-    <form name="projectForm">
-      <md-input-container>
-        <label>Description</label>
-        <input md-maxlength="30" required name="description" ng-model="newThing">
-        <div ng-messages="projectForm.description.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
-        </div>
-      </md-input-container>
-    </form>
-  </md-dialog-content>
-  <div class="md-actions">
-    <md-button ng-click="closeDialog()" class="md-primary">
-      Cancel
-    </md-button>
-    <md-button ng-click="addThing()" class="md-primary">
-      Save
-    </md-button>
-  </div>
+	<md-dialog-content>
+		<h2 class="md-title">
+			Report Title
+		</h2>
+		<form name="reportForm">
+			<md-input-container>
+				<label>Title</label>
+				<input md-maxlength="30" required name="title" ng-model="newReport.title">
+				<div ng-messages="reportForm.title.$error">
+					<div ng-message="required">This is required.</div>
+					<div ng-message="md-maxlength">The title has to be less than 30 characters long.</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Description</label>
+				<input md-maxlength="100" required name="description" ng-model="newReport.description">
+				<div ng-messages="reportForm.description.$error">
+					<div ng-message="required">This is required.</div>
+					<div ng-message="md-maxlength">The description has to be less than 100 characters long.</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Hours Worked</label>
+				<input type="number" step="0.25" required name="hours" ng-model="newReport.hours">
+				<div ng-messages="reportForm.hours.$error">
+					<div ng-message="required">This is required.</div>
+					<div ng-message="md-maxlength">The amount of hours has to be less than 8 per report</div>
+				</div>
+			</md-input-container>
+			<md-checkbox ng-model="newReport.billable" aria-label="Billable?">
+			</md-checkbox>
+		</form>
+	</md-dialog-content>
+	<div class="md-actions">
+		<md-button ng-click="closeDialog()" class="md-primary">
+			Cancel
+		</md-button>
+		<md-button ng-disabled="reportForm.$invalid" ng-click="addReport()" class="md-primary">
+			Save
+		</md-button>
+	</div>
 </md-dialog>
