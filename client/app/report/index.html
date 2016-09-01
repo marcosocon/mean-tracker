@@ -8,7 +8,7 @@
 					<span class="md-headline">{{report.title}}</span>
 					<span class="md-subhead">{{report.description}}</span>
 					<p>{{report.date | date}}</p>
-					<p>{{report.hours}}</p>
+					<p>{{report.hours}}hs</p>
 					<p am-time-ago="report.created_at"></p>
 					<p>Billable : {{report.billable}}</p>
 				</md-card-title-text>
@@ -17,7 +17,9 @@
 				</md-card-title-media>
 			</md-card-title>
 			<md-card-actions layout="row" layout-align="end center">
-			<md-button>Action 1</md-button>
+			<md-button class="md-secondary" ng-click="editReport($event,report)"   >
+				<md-icon md-svg-icon="assets/icons/edit.svg"></md-icon>
+			</md-button>
 			<md-button class="md-secondary" ng-click="showConfirm($event, report)"   >
 				<md-icon md-svg-icon="assets/icons/delete.svg"></md-icon>
 			</md-button>

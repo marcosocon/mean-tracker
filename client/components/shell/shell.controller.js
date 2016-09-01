@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tracker2App')
-  .controller('ShellCtrl', function ($mdSidenav, $mdDialog, $scope, $location, Auth) {
+  .controller('ShellCtrl', function ($mdSidenav, $mdDialog, $scope, $location, Auth, modalService) {
 
 
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -28,12 +28,6 @@ angular.module('tracker2App')
     };
 
     $scope.showAddDialog = function($event) {
-      var parentEl = angular.element(document.body);
-      $mdDialog.show({
-        parent: parentEl,
-        targetEvent: $event,
-        templateUrl: 'components/shell/dialog/dialog.html',
-        controller: 'DialogController'
-      });
+		modalService.openReportModal($event);
     };
   });

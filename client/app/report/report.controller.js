@@ -5,7 +5,7 @@
 		.controller('ReportsCtrl', ReportsCtrl);
 
 
-		function ReportsCtrl ($scope, $http, socket, $mdToast, $mdDialog){
+		function ReportsCtrl ($scope, $http, socket, $mdToast, $mdDialog, modalService){
 			$scope.reports = [];
 			$http.get('/api/reports').success(function(reports) {
 				$scope.reports = reports;
@@ -24,6 +24,10 @@
 				}, function() {
 					return false;
 				});
+			};
+
+			$scope.editReport = function($event, report){
+				modalService.openEditReportModal($event, report);
 			};
 
 			$scope.deleteReport = function(report) {

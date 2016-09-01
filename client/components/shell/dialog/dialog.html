@@ -1,11 +1,11 @@
-<md-dialog aria-label="List dialog">
+<md-dialog aria-label="List dialog" class="add-report-dialog" layout-padding>
 	<md-dialog-content>
 		<h2 class="md-title">
 			Report Title
 		</h2>
 		<form name="reportForm">
 			<div layout="row">
-				<div layout="column">
+				<div flex>
 					<md-input-container>
 						<label>Title</label>
 						<input md-maxlength="30" required name="title" ng-model="newReport.title">
@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div layout="row">
-				<div layout="column">
+				<div flex>
 					<md-input-container>
 						<label>Description</label>
 						<input md-maxlength="100" required name="description" ng-model="newReport.description">
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div layout="row">
-				<div layout="column">
+				<div flex>
 					<md-input-container>
 						<label>Date</label>
 						<md-datepicker name="dateField" ng-model="newReport.myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div layout="row">
-				<div layout="column">
+				<div flex>
 					<md-input-container>
 						<label>Hours Worked</label>
 						<input type="number" max="8" min="0" step="0.25" required name="hours" ng-model="newReport.hours">
@@ -55,17 +55,20 @@
 				</div>
 			</div>
 			<div layout="row">
-				<div layout="column">
+				<div flex>
 					<label>Billable</label>
-					<md-checkbox ng-model="newReport.billable" aria-label="Billable?" ng-true-value="'Yes'" ng-false-value="'No'"></md-checkbox>
+					<md-checkbox class="billing-checkbox"ng-model="newReport.billable" aria-label="Billable?" ng-true-value="'Yes'" ng-false-value="'No'"></md-checkbox>
 				</div>
 			</div>
 			<div class="md-actions">
 				<md-button ng-click="closeDialog()" class="md-primary">
 					Cancel
 				</md-button>
-				<md-button ng-click="addReport()" class="md-primary">
+				<md-button ng-show="save"ng-click="addReport(true)" class="md-primary">
 					Save
+				</md-button>
+				<md-button ng-show="!save"ng-click="addReport(false)" class="md-primary">
+					Update
 				</md-button>
 			</div>
 		</form>

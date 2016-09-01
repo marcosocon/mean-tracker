@@ -37,3 +37,21 @@ md-toast.md-success-toast-theme > .md-toast-content {
 	color: #dd2c00;
 	margin-left: 15px;
 }
+
+.add-report-dialog{
+	width: 500px;
+	padding: 20px;
+}
+
+md-input-container{
+	width: 100%;
+	margin: 10px 0;
+}
+
+.billing-checkbox{
+	margin-left: 15px!important;
+}
+
+.md-actions{
+	border-top: none!important;
+}

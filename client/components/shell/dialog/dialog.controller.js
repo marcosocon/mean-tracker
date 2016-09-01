@@ -1,8 +1,20 @@
 'use strict';
 
 angular.module('tracker2App')
-	.controller('DialogController', function ($scope, $mdDialog, $http, $mdToast, Auth) {
+	.controller('DialogController', function ($scope, $mdDialog, $http, $mdToast, Auth, reportData) {
 		$scope.newReport = [];
+		if (reportData) {
+			$scope.newReport = reportData;
+		} else {
+			$scope.newReport = [];
+		}
+		if (!$scope.newReport._id) {
+			$scope.save = true;
+		} else {
+			$scope.save = false;
+		}
+
+
 		$scope.newReport.myDate = new Date();
 		$scope.minDate = new Date(
 			$scope.newReport.myDate.getFullYear(),
@@ -15,7 +27,7 @@ angular.module('tracker2App')
 		};
 
 
-		$scope.addReport = function() {
+		$scope.addReport = function(save) {
 			if(!$scope.newReport || !$scope.newReport.title || !$scope.newReport.description || !$scope.newReport.hours) {
 				$mdToast.show(
 					$mdToast.simple()
@@ -36,17 +48,31 @@ angular.module('tracker2App')
 				billable:$scope.newReport.billable
 			};
 
-			$http.post('/api/reports', data).
-									then(function () {
-										$mdToast.show(
-											$mdToast.simple()
-											.textContent('Report sucessfully added!')
-												.theme('success-toast')
-												.position('top right')
-												.hideDelay(1500)
-											);
-										});
-										$scope.newReport = '';
-										$mdDialog.hide();
-									};
+			if (save) {
+				$http.post('/api/reports', data).
+					then(function () {
+						$mdToast.show(
+							$mdToast.simple()
+							.textContent('Report sucessfully added!')
+							.theme('success-toast')
+							.position('top right')
+							.hideDelay(1500)
+						);
+					});
+			} else {
+				data._id = $scope.newReport._id;
+				$http.put('/api/reports/' + data._id, data).
+					then(function () {
+						$mdToast.show(
+							$mdToast.simple()
+							.textContent('Report sucessfully updated!')
+							.theme('success-toast')
+							.position('top right')
+							.hideDelay(1500)
+						);
+					});
+			}
+			$scope.newReport = '';
+			$mdDialog.hide();
+		};
 	});
