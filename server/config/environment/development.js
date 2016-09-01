@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/tracker2-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

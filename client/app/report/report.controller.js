@@ -5,40 +5,25 @@
 		.controller('ReportsCtrl', ReportsCtrl);
 
 
-		function ReportsCtrl ($scope, $http, socket, $mdToast){
+		function ReportsCtrl ($scope, $http, socket, $mdToast, $mdDialog){
 			$scope.reports = [];
 			$http.get('/api/reports').success(function(reports) {
 				$scope.reports = reports;
 				socket.syncUpdates('report', $scope.reports);
 			});
 
-			$scope.getColor = function($index) {
-				var _d = ($index + 1) % 11;
-				var bg = '';
-
-				switch(_d) {
-					case 1:       bg = 'red';         break;
-					case 2:       bg = 'green';       break;
-					case 3:       bg = 'darkBlue';    break;
-					case 4:       bg = 'blue';        break;
-					case 5:       bg = 'yellow';      break;
-					case 6:       bg = 'pink';        break;
-					case 7:       bg = 'darkBlue';    break;
-					case 8:       bg = 'purple';      break;
-					case 9:       bg = 'deepBlue';    break;
-					case 10:      bg = 'lightPurple'; break;
-					default:      bg = 'yellow';      break;
-				}
-
-				return bg;
-			};
-
-			$scope.getSpan = function($index) {
-				var _d = ($index + 1) % 11;
-
-				if (_d === 1 || _d === 5) {
-					return 2;
-				}
+			$scope.showConfirm = function(ev, report) {
+				var confirm = $mdDialog.confirm()
+				.title('Are you sure?')
+				.textContent('This action cannot be undone')
+				.targetEvent(ev)
+				.ok('Yes')
+				.cancel('Cancel');
+				$mdDialog.show(confirm).then(function() {
+					$scope.deleteReport(report);
+				}, function() {
+					return false;
+				});
 			};
 
 			$scope.deleteReport = function(report) {

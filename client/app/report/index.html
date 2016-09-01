@@ -2,17 +2,26 @@
 
 <md-content flex layout-margin class="main-container">
 	<md-list>
-		<md-list-item class="md-2-line" ng-repeat="report in reports">
-			<div class="md-list-item-text">
-				<h5>{{report.title}}</h5>
-				<p>{{report.description}}</p>
-				<p>{{report.hours}}</p>
-				<span am-time-ago="report.created_at"></span>
-				<span>{{report.billable}}</span>
-			</div>
-			<md-button class="md-secondary md-icon-button">
-				<md-icon md-svg-icon="assets/icons/delete.svg" ng-click="deleteReport(report)"></md-icon>
+		<md-card md-theme="default" md-theme-watch ng-repeat="report in reports">
+			<md-card-title style="line-height:0px">
+				<md-card-title-text>
+					<span class="md-headline">{{report.title}}</span>
+					<span class="md-subhead">{{report.description}}</span>
+					<p>{{report.date | date}}</p>
+					<p>{{report.hours}}</p>
+					<p am-time-ago="report.created_at"></p>
+					<p>Billable : {{report.billable}}</p>
+				</md-card-title-text>
+				<md-card-title-media>
+					<div class="md-media-lg card-media"></div>
+				</md-card-title-media>
+			</md-card-title>
+			<md-card-actions layout="row" layout-align="end center">
+			<md-button>Action 1</md-button>
+			<md-button class="md-secondary" ng-click="showConfirm($event, report)"   >
+				<md-icon md-svg-icon="assets/icons/delete.svg"></md-icon>
 			</md-button>
-		</md-list-item>
+		</md-card-actions>
+		</md-card>
 	</md-list>
 </md-content>
