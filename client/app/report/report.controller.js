@@ -44,15 +44,13 @@
 			$scope.deleteReport = function(report) {
 				$http.delete('/api/reports/' + report._id).
 				then(function () {
-					$mdToast.show({
-						template: '<md-toast>' +
-						'<div class="md-toast-content">' +
-						'Report sucessfully deleted.' +
-						'</div>' +
-						'</md-toast>',
-						position: 'top right',
-						hideDelay: 1500
-					});
+					$mdToast.show(
+						$mdToast.simple()
+						.textContent('Report sucessfully deleted!')
+							.theme('success-toast')
+							.position('top right')
+							.hideDelay(1000)
+					);
 				});
 			};
 

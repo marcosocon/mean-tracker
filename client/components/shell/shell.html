@@ -1,7 +1,7 @@
 <div ng-controller="ShellCtrl" class="main-shell">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
     <md-toolbar class="md-tall md-accent">
-      
+
       <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container">
         <div flex></div>
         <div layout-padding layout="column">
@@ -9,7 +9,7 @@
           <div class="profile-email">{{ getCurrentUser().email }}</div>
         </div>
       </div>
-      
+
     </md-toolbar>
     <md-content layout-padding>
 
@@ -35,25 +35,6 @@
               Add
             </md-button>
           </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="redial($event)">
-              <md-icon md-svg-icon="communication:dialpad" md-menu-align-target></md-icon>
-              Redial
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button disabled="disabled" ng-click="checkVoicemail()">
-              <md-icon md-svg-icon="communication:voicemail"></md-icon>
-              Check voicemail
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="toggleNotifications()">
-              <md-icon md-svg-icon="social:notifications{{notificationsEnabled ? '_off' : ''}}"></md-icon>
-              {{notificationsEnabled ? 'Disable' : 'Enable' }} notifications
-            </md-button>
-          </md-menu-item>
-          
           <md-menu-divider></md-menu-divider>
           <md-menu-item ng-hide="isLoggedIn()" ui-sref="login">
             <md-button>
@@ -73,7 +54,6 @@
               Logout
             </md-button>
           </md-menu-item>
-          
         </md-menu-content>
       </md-menu>
     </div>

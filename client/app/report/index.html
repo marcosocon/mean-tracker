@@ -1,19 +1,17 @@
 <div ng-include="'components/shell/shell.html'"></div>
 
-<md-content flex layout-margin>
+<md-content flex layout-margin class="main-container">
 	<md-list>
 		<md-list-item class="md-2-line" ng-repeat="report in reports">
-			<md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
 			<div class="md-list-item-text">
 				<h5>{{report.title}}</h5>
 				<p>{{report.description}}</p>
 				<p>{{report.hours}}</p>
 				<span am-time-ago="report.created_at"></span>
 				<span>{{report.billable}}</span>
-				<i class="fa fa-lg fa-trash" aria-hidden="true" ng-click="deleteReport(report)"></i></span>
 			</div>
-			<md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
-				<md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
+			<md-button class="md-secondary md-icon-button">
+				<md-icon md-svg-icon="assets/icons/delete.svg" ng-click="deleteReport(report)"></md-icon>
 			</md-button>
 		</md-list-item>
 	</md-list>

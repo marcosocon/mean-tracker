@@ -8,6 +8,7 @@ angular.module('tracker2App', [
   'ngMessages',
   'btford.socket-io',
   'ui.router',
+  'angularMoment',
   'ngMaterial'
 ])
   .config(function($mdIconProvider) {
