@@ -5,8 +5,10 @@
 		.controller('ReportsCtrl', ReportsCtrl);
 
 
-		function ReportsCtrl ($scope, $http, socket, $mdToast, $mdDialog, modalService){
+		function ReportsCtrl ($scope, $http, socket, $mdDialog, modalService, toastService){
+
 			$scope.reports = [];
+			
 			$http.get('/api/reports').success(function(reports) {
 				$scope.reports = reports;
 				socket.syncUpdates('report', $scope.reports);
@@ -33,13 +35,7 @@
 			$scope.deleteReport = function(report) {
 				$http.delete('/api/reports/' + report._id).
 				then(function () {
-					$mdToast.show(
-						$mdToast.simple()
-						.textContent('Report sucessfully deleted!')
-							.theme('success-toast')
-							.position('top right')
-							.hideDelay(1000)
-					);
+					toastService.openSuccessToast('Report sucessfully deleted!');
 				});
 			};
 

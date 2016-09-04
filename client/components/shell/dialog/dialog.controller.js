@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tracker2App')
-	.controller('DialogController', function ($scope, $mdDialog, $http, $mdToast, Auth, reportData) {
+	.controller('DialogController', function ($scope, $mdDialog, $http, Auth, reportData ,toastService) {
 		$scope.newReport = [];
 		if (reportData) {
 			$scope.newReport = reportData;
@@ -29,13 +29,7 @@ angular.module('tracker2App')
 
 		$scope.addReport = function(save) {
 			if(!$scope.newReport || !$scope.newReport.title || !$scope.newReport.description || !$scope.newReport.hours) {
-				$mdToast.show(
-					$mdToast.simple()
-					.textContent('Please fill all the required fields!')
-					.theme('error-toast')
-					.position('top right')
-					.hideDelay(1500)
-				);
+				toastService.openErrorToast('Please fill all the required fields!');
 				return false;
 			}
 			var data = {
@@ -51,25 +45,13 @@ angular.module('tracker2App')
 			if (save) {
 				$http.post('/api/reports', data).
 					then(function () {
-						$mdToast.show(
-							$mdToast.simple()
-							.textContent('Report sucessfully added!')
-							.theme('success-toast')
-							.position('top right')
-							.hideDelay(1500)
-						);
+						toastService.openSuccessToast('Report sucessfully added!');
 					});
 			} else {
 				data._id = $scope.newReport._id;
 				$http.put('/api/reports/' + data._id, data).
 					then(function () {
-						$mdToast.show(
-							$mdToast.simple()
-							.textContent('Report sucessfully updated!')
-							.theme('success-toast')
-							.position('top right')
-							.hideDelay(1500)
-						);
+						toastService.openSuccessToast('Report sucessfully updated!');
 					});
 			}
 			$scope.newReport = '';
