@@ -2,7 +2,7 @@
 
 <md-content flex layout-margin class="main-container">
 	<md-list>
-		<md-card md-theme="default" md-theme-watch ng-repeat="report in reports">
+		<md-card md-theme="default" md-theme-watch ng-repeat="report in reports | orderBy:'-date'">
 			<md-card-title style="line-height:0px">
 				<md-card-title-text>
 					<span class="md-headline">{{report.title}}</span>
